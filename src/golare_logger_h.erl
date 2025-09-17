@@ -35,7 +35,7 @@ log(#{level := Level} = LogEvent, _Config) ->
         {ok, _EventId} = golare:capture_event(Event)
     catch
         exit:{noproc, _} ->
-            throw(transport_not_active);
+            ok;
         Type:Rsn:Trace ->
             Crash = #{
                 logger => ?MODULE,
