@@ -31,8 +31,19 @@ global_release() ->
     case {os:getenv("RELEASE_NAME"), os:getenv("RELEASE_VSN")} of
         {false, _} -> null;
         {_, false} -> null;
-        {Name, Vsn} -> iolist_to_binary([Name, $@, Vsn])
+        {Name, Vsn} -> iolist_to_binary([Name, $@, semver(Vsn)])
     end.
+
+semver(Vsn) when is_binary(Vsn) ->
+    case re:run(Vsn, ~S"^v[\d\.]+$") of
+        {match, _} ->
+            <<"v", SemVer/binary>> = Vsn,
+            SemVer;
+        nomatch ->
+            Vsn
+    end;
+semver(Vsn) ->
+    semver(list_to_binary(Vsn)).
 
 global_server_name() ->
     case os:getenv("HOSTNAME") of

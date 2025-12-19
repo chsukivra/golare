@@ -14,6 +14,18 @@ OTP Logger
 Golare will register itself as an OTP logger handler. The handler will re-shape the logged event to be a sentry event, and send it to the
 transport `gen_statem`.
 
+Environment variables
+-----
+
+`RELEASE_NAME` and `RELEASE_VSN` will be read and be sent with events to sentry. I.e.
+
+    RELEASE_NAME=myapp
+    RELEASE_VSN=1.42.3
+
+If `RELEASE_VSN` looks like v followed by a semver, the v will be removed.
+
+`HOSTNAME` will be used as the `server_name` sent to sentry.
+
 Transport states
 -----
 
