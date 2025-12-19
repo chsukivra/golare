@@ -17,14 +17,13 @@ transport `gen_statem`.
 Environment variables
 -----
 
-`RELEASE_NAME` and `RELEASE_VSN` will be read and be sent with events to sentry. I.e.
+The app automatically captures Sentry metadata from the following environment variables:
 
-    RELEASE_NAME=myapp
-    RELEASE_VSN=1.42.3
+`RELEASE_NAME`: The name of the application (e.g., myapp).
 
-If `RELEASE_VSN` looks like v followed by a semver, the v will be removed.
+`RELEASE_VSN`: The version string. A leading v will be automatically stripped to comply with SemVer (e.g., v1.42.3 becomes 1.42.3).
 
-`HOSTNAME` will be used as the `server_name` sent to sentry.
+`HOSTNAME`: will be used as the `server_name` sent to sentry.
 
 Transport states
 -----
